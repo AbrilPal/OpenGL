@@ -48,7 +48,6 @@ class Renderer(object):
         glEnable(GL_DEPTH_TEST)
         glViewport(0, 0, self.width, self.height)
 
-        # Perspective Projection Matrix
         self.projection = glm.perspective(glm.radians(60), self.width / self.height, 0.1, 1000)
 
         self.cubePos = glm.vec3(0,0,0)
