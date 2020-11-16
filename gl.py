@@ -1,3 +1,7 @@
+# Andrea Abril Palencia Gutierrez, 18198
+# OpenGL 1: Cameras --- Graficas por computadora, seccion 20
+# 09/11/2020 - 16/11/2020
+
 from OpenGL.GL import *
 from OpenGL.GL.shaders import compileProgram, compileShader
 import glm
@@ -72,9 +76,9 @@ class Renderer(object):
 
     def createObjects(self):
 
-        self.VBO = glGenBuffers(1) #Vertex Buffer Object
-        self.EBO = glGenBuffers(1) #Element Buffer Object
-        self.VAO = glGenVertexArrays(1) #Vertex Array Object
+        self.VBO = glGenBuffers(1)
+        self.EBO = glGenBuffers(1) 
+        self.VAO = glGenVertexArrays(1)
 
         glBindVertexArray(self.VAO)
 
@@ -83,12 +87,8 @@ class Renderer(object):
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.EBO)
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, rectIndices.nbytes, rectIndices, GL_STATIC_DRAW)
-
-        # Atributo de posicion de vertices
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 4 * 6, ctypes.c_void_p(0))
         glEnableVertexAttribArray(0)
-
-        # Atributo de color de vertices
         glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 4 * 6, ctypes.c_void_p(4 * 3))
         glEnableVertexAttribArray(1)
 
@@ -98,7 +98,6 @@ class Renderer(object):
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT )
 
         i = glm.mat4(1)
-        # Model/Object matrix: translate * rotate * scale
         translate = glm.translate(i, self.cubePos)
         pitch = glm.rotate(i, glm.radians( 0 ), glm.vec3(1,0,0))
         yaw   = glm.rotate(i, glm.radians( 0 ), glm.vec3(0,1,0))
@@ -107,8 +106,6 @@ class Renderer(object):
         scale = glm.scale(i, glm.vec3(1,1,1))
         model = translate * rotate * scale
         
-        # View Matrix
-        # glm.lookAt( eye, center, up)
         camTranslate = glm.translate(i, glm.vec3( 0, 0, 3))
         camPitch = glm.rotate(i, glm.radians( 0 ), glm.vec3(1,0,0))
         camYaw   = glm.rotate(i, glm.radians( 0 ), glm.vec3(0,1,0))

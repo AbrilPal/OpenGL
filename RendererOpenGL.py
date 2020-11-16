@@ -1,3 +1,8 @@
+# Andrea Abril Palencia Gutierrez, 18198
+# OpenGL 1: Cameras --- Graficas por computadora, seccion 20
+# 09/11/2020 - 16/11/2020
+
+
 import pygame
 from pygame.locals import *
 
@@ -8,13 +13,11 @@ import shaders
 
 deltaTime = 0.0
 
-# Inicializacion de pygame
 pygame.init()
 clock = pygame.time.Clock()
 screenSize = (960, 540)
 screen = pygame.display.set_mode(screenSize, DOUBLEBUF | OPENGL)
 
-# Inicializacion de nuestro Renderer en OpenGL
 r = Renderer(screen)
 r.setShaders(shaders.vertex_shader, shaders.fragment_shader)
 r.createObjects()
@@ -26,7 +29,6 @@ cubeZ = 0
 isPlaying = True
 while isPlaying:
 
-    # Para revisar si una tecla esta presionada
     keys = pygame.key.get_pressed()
     if keys[pygame.K_a]:
         cubeX -= 2 * deltaTime
@@ -41,7 +43,6 @@ while isPlaying:
         if ev.type == pygame.QUIT:
             isPlaying = False
         elif ev.type == pygame.KEYDOWN:
-            # para revisar en el momento que se presiona una tecla
             if ev.key == pygame.K_1:
                 r.filledMode()
             elif ev.key == pygame.K_2:
@@ -52,7 +53,6 @@ while isPlaying:
 
     r.translateCube(cubeX, 0, cubeZ)
 
-    # Main Renderer Loop
     r.render()
 
     pygame.display.flip()
