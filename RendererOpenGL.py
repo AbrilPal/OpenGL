@@ -6,53 +6,60 @@
 import pygame
 from pygame.locals import *
 
-from gl import Renderer
+from gl import Renderer, Model
 import shaders
-
-
 
 deltaTime = 0.0
 
+# Inicializacion de pygame
 pygame.init()
 clock = pygame.time.Clock()
 screenSize = (960, 540)
 screen = pygame.display.set_mode(screenSize, DOUBLEBUF | OPENGL)
 
+# Inicializacion de nuestro Renderer en OpenGL
 r = Renderer(screen)
+r.camPosition.z = 200
+r.camPosition.y = 100
+r.pointLight.y = 100
+r.pointLight.z = 50
+
 r.setShaders(shaders.vertex_shader, shaders.fragment_shader)
-r.createObjects()
+
+r.modelList.append(Model('./models/hombre.obj', './models/hombre.bmp'))
 
 
-cubeX = 0
-cubeZ = 0
 
 isPlaying = True
 while isPlaying:
 
+    # Para revisar si una tecla esta presionada
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_a]:
-        cubeX -= 2 * deltaTime
-    if keys[pygame.K_d]:
-        cubeX += 2 * deltaTime
-    if keys[pygame.K_w]:
-        cubeZ -= 2 * deltaTime
-    if keys[pygame.K_s]:
-        cubeZ += 2 * deltaTime
+
+    # Move cam
+    if keys[K_d]:
+        r.camPosition.x += 1 * deltaTime
+    if keys[K_a]:
+        r.camPosition.x -= 1 * deltaTime
+    if keys[K_w]:
+        r.camPosition.z -= 1 * deltaTime
+    if keys[K_s]:
+        r.camPosition.z += 1 * deltaTime
+
 
     for ev in pygame.event.get():
         if ev.type == pygame.QUIT:
             isPlaying = False
         elif ev.type == pygame.KEYDOWN:
+            # para revisar en el momento que se presiona una tecla
             if ev.key == pygame.K_1:
                 r.filledMode()
             elif ev.key == pygame.K_2:
-                r.wireframeMode
+                r.wireframeMode()
             elif ev.key == pygame.K_ESCAPE:
                 isPlaying = False
 
-
-    r.translateCube(cubeX, 0, cubeZ)
-
+    # Main Renderer Loop
     r.render()
 
     pygame.display.flip()
