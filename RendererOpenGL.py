@@ -30,7 +30,7 @@ r.setShaders(shaders.vertex_shader, shaders.fragment_shader)
 m = Model('./models/Hamster.obj', './models/Hamster.bmp')
 
 pygame.mixer.music.load('sonidos/caricatura.mp3')
-pygame.mixer.music.play(0)
+pygame.mixer.music.play(5)
 
 r.modelList.append(m)
 
