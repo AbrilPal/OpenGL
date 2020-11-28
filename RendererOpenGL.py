@@ -29,6 +29,9 @@ r.setShaders(shaders.vertex_shader, shaders.fragment_shader)
 
 m = Model('./models/Hamster.obj', './models/Hamster.bmp')
 
+pygame.mixer.music.load('sonidos/caricatura.mp3')
+pygame.mixer.music.play(0)
+
 r.modelList.append(m)
 
 isPlaying = True
@@ -113,6 +116,9 @@ while isPlaying:
                 r.wireframeMode()
             elif ev.key == pygame.K_ESCAPE:
                 isPlaying = False
+        elif ev.type == pygame.MOUSEBUTTONDOWN:
+            r.pointLight.x = -r.pointLight.x - 100
+            r.pointLight.y = -r.pointLight.y - 100
 
     # Main Renderer Loop
     r.render()
