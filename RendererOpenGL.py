@@ -2,7 +2,6 @@
 # Proyecto No.4 --- Graficas por computadora, seccion 20
 # 25/11/2020 - 28/11/2020
 
-
 import pygame
 from pygame.locals import *
 
@@ -20,23 +19,11 @@ screen = pygame.display.set_mode(screenSize, DOUBLEBUF | OPENGL)
 # Inicializacion de nuestro Renderer en OpenGL
 r = Renderer(screen)
 
-# HOMBRE 
-# r.camPosition.z = 200
-# r.camPosition.y = 100
-# r.pointLight.y = 100
-# r.pointLight.z = 50
-
 # HAMSTER
 r.camPosition.z = 1
 r.camPosition.y = 0
 r.pointLight.y = 50
 r.pointLight.z = 50
-
-# MUJER Y MUJER E HIJO  
-# r.camPosition.z = 50
-# r.camPosition.y = 150
-# r.pointLight.y = 0
-# r.pointLight.z = 300
 
 r.setShaders(shaders.vertex_shader, shaders.fragment_shader)
 
@@ -44,15 +31,13 @@ m = Model('./models/Hamster.obj', './models/Hamster.bmp')
 
 r.modelList.append(m)
 
-
-
 isPlaying = True
 while isPlaying:
 
     # Para revisar si una tecla esta presionada
     keys = pygame.key.get_pressed()
 
-    # Move cam
+    # Movimientos de camara
     if keys[K_d]:
         r.camPosition.x += 1 * deltaTime
     if keys[K_a]:
@@ -73,7 +58,49 @@ while isPlaying:
         m.rotation.x += 3 * deltaTime
     if keys[K_u]:
         m.rotation.x -= 3 * deltaTime
+    if keys[K_i]:
+        m.rotation.z += 3 * deltaTime
+    if keys[K_o]:
+        m.rotation.z -= 3 * deltaTime
 
+    # cambiar de modelos
+    if keys[K_c]:
+        # MUJER 
+        r.modelList.clear()
+        r.camPosition.z = 50
+        r.camPosition.y = 150
+        r.pointLight.y = 0
+        r.pointLight.z = 300
+        m = Model('./models/mujer.obj', './models/mujer.bmp')
+        r.modelList.append(m)
+    if keys[K_v]:
+        r.modelList.clear()
+        # MUJER E HIJO
+        r.camPosition.z = 50
+        r.camPosition.y = 150
+        r.pointLight.y = 0
+        r.pointLight.z = 300
+        m = Model('./models/mujer_hijo.obj', './models/mujer_hijo.bmp')
+        r.modelList.append(m)
+    if keys[K_b]:
+        r.modelList.clear()
+        # HAMSTER
+        r.camPosition.z = 1
+        r.camPosition.y = 0
+        r.pointLight.y = 50
+        r.pointLight.z = 50
+        m = Model('./models/Hamster.obj', './models/Hamster.bmp')
+        r.modelList.append(m)
+    if keys[K_n]:
+        r.modelList.clear()
+        # HOMBRE
+        r.camPosition.z = 50
+        r.camPosition.y = 170
+        r.camPosition.x = 5
+        r.pointLight.y = 0
+        r.pointLight.z = 300
+        m = Model('./models/hombre.obj', './models/hombre.bmp')
+        r.modelList.append(m)
 
     for ev in pygame.event.get():
         if ev.type == pygame.QUIT:
