@@ -1,6 +1,6 @@
 # Andrea Abril Palencia Gutierrez, 18198
-# OpenGL 1: Cameras --- Graficas por computadora, seccion 20
-# 09/11/2020 - 16/11/2020
+# Proyecto No.4 --- Graficas por computadora, seccion 20
+# 25/11/2020 - 28/11/2020
 
 
 import pygame
@@ -19,14 +19,27 @@ screen = pygame.display.set_mode(screenSize, DOUBLEBUF | OPENGL)
 
 # Inicializacion de nuestro Renderer en OpenGL
 r = Renderer(screen)
-r.camPosition.z = 200
-r.camPosition.y = 100
-r.pointLight.y = 100
-r.pointLight.z = 50
+# HOMBRE 
+# r.camPosition.z = 200
+# r.camPosition.y = 100
+# r.pointLight.y = 100
+# r.pointLight.z = 50
+
+# HAMSTER
+# r.camPosition.z = 1
+# r.camPosition.y = 0
+# r.pointLight.y = 50
+# r.pointLight.z = 50
+
+# MUJER Y MUJER E HIJO  
+r.camPosition.z = 50
+r.camPosition.y = 150
+r.pointLight.y = 0
+r.pointLight.z = 300
 
 r.setShaders(shaders.vertex_shader, shaders.fragment_shader)
 
-r.modelList.append(Model('./models/hombre.obj', './models/hombre.bmp'))
+r.modelList.append(Model('./models/mujer_hijo.obj', './models/mujer_hijo.bmp'))
 
 
 
