@@ -19,6 +19,7 @@ screen = pygame.display.set_mode(screenSize, DOUBLEBUF | OPENGL)
 
 # Inicializacion de nuestro Renderer en OpenGL
 r = Renderer(screen)
+
 # HOMBRE 
 # r.camPosition.z = 200
 # r.camPosition.y = 100
@@ -26,20 +27,22 @@ r = Renderer(screen)
 # r.pointLight.z = 50
 
 # HAMSTER
-# r.camPosition.z = 1
-# r.camPosition.y = 0
-# r.pointLight.y = 50
-# r.pointLight.z = 50
+r.camPosition.z = 1
+r.camPosition.y = 0
+r.pointLight.y = 50
+r.pointLight.z = 50
 
 # MUJER Y MUJER E HIJO  
-r.camPosition.z = 50
-r.camPosition.y = 150
-r.pointLight.y = 0
-r.pointLight.z = 300
+# r.camPosition.z = 50
+# r.camPosition.y = 150
+# r.pointLight.y = 0
+# r.pointLight.z = 300
 
 r.setShaders(shaders.vertex_shader, shaders.fragment_shader)
 
-r.modelList.append(Model('./models/mujer_hijo.obj', './models/mujer_hijo.bmp'))
+m = Model('./models/Hamster.obj', './models/Hamster.bmp')
+
+r.modelList.append(m)
 
 
 
@@ -58,6 +61,18 @@ while isPlaying:
         r.camPosition.z -= 1 * deltaTime
     if keys[K_s]:
         r.camPosition.z += 1 * deltaTime
+    if keys[K_e]:
+        r.camPosition.y -= 1 * deltaTime
+    if keys[K_q]:
+        r.camPosition.y += 1 * deltaTime
+    if keys[K_r]:
+        m.rotation.y += 3 * deltaTime
+    if keys[K_t]:
+        m.rotation.y -= 3 * deltaTime
+    if keys[K_y]:
+        m.rotation.x += 3 * deltaTime
+    if keys[K_u]:
+        m.rotation.x -= 3 * deltaTime
 
 
     for ev in pygame.event.get():
